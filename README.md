@@ -42,7 +42,7 @@ README.md
 - Linux/macOS 使用时需要安装 PowerShell 7，并用 `pwsh` 替换示例中的 `powershell`
 - Git、Python、Conda、NVIDIA 工具均为可选；Skill 只检视实际存在的工具
 
-## 安装到另一台 Windows 电脑
+## 部署到 Windows 系统电脑
 
 ### 方法一：使用 ZIP 包
 
