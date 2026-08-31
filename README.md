@@ -1,5 +1,5 @@
 # Manage Workflow for OpenCode
-
+作者：杨淇竣
 `manage-workflow` 是一个本地优先的 OpenCode 工作流 Skill，用于管理研发与模型训练相关的日常任务、临时安排、日程和工作汇报。
 
 ## 功能
