@@ -85,6 +85,9 @@ def build_prompt(
         "setting_notes": scene["setting_notes_en"],
         "safe_zone": scene["safe_zone_en"],
         "loop_pose": scene["loop_pose_en"],
+        "surface_response": scene["surface_response_en"],
+        "ambient_cycle": scene["ambient_cycle_en"],
+        "state_restore": scene["state_restore_en"],
         "action": scene["action_en"],
         "extra_direction": extra_direction,
     }

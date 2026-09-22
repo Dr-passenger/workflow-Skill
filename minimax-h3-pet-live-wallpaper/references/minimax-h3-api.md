@@ -85,7 +85,7 @@ N/A
 
 Use `<Subject N>` for reusable visible content such as the pet and environment. Because both pictures only define subjects in this workflow and are not concrete first/key/last frames, cite `<Picture 1>` and `<Picture 2>` inside the corresponding subject definitions rather than creating standalone picture entries. Keep every label's meaning consistent across all six sections.
 
-For generation tasks, the official guide normally targets a detailed 350–500 English-word `detailed_description`. A single shot still needs explicit composition, subject appearance and position, environment and lighting, action and state changes, camera behavior, current sound, and where references take effect. This workflow also inserts a fixed 8-second action timeline, scene-specific safe zone, solid collision boundaries, visible prop clearance, and matching 0.00/8.00-second loop anchors.
+For generation tasks, the official guide normally targets a detailed 350–500 English-word `detailed_description`. A single shot still needs explicit composition, subject appearance and position, environment and lighting, action and state changes, camera behavior, current sound, and where references take effect. This workflow also inserts a fixed 8-second action timeline, scene-specific safe zone, solid collision boundaries, visible prop clearance, material-aware ground response, a closed ambient cycle, state restoration, and matching 0.00/8.00-second loop anchors.
 
 ## Current request limits
 

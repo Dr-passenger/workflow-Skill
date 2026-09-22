@@ -1,4 +1,4 @@
 interface:
   display_name: "萌宠动态桌面 Ref2VA 生成器"
-  short_description: "生成防穿模、首尾一致的 8 秒 MiniMax-H3 Ref2VA 萌宠壁纸"
-  default_prompt: "使用 $minimax-h3-pet-live-wallpaper，把我上传的萌宠照片作为 <Picture 1>，选择一个家庭背景作为 <Picture 2>，使用低碰撞动作和 0.00/8.00 秒一致锚点生成 8 秒可循环动态桌面壁纸。"
+  short_description: "生成含场景物理反馈、防穿模且首尾一致的 8 秒 Ref2VA 萌宠壁纸"
+  default_prompt: "使用 $minimax-h3-pet-live-wallpaper，把我上传的萌宠照片作为 <Picture 1>，选择一个家庭背景作为 <Picture 2>，使用低碰撞动作、材质对应的接触反馈和 0.00/8.00 秒一致锚点，生成 8 秒可循环动态桌面壁纸。"

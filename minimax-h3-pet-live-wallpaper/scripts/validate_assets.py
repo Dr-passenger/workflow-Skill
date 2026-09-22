@@ -49,6 +49,9 @@ def main() -> int:
             "setting_notes_en",
             "safe_zone_en",
             "loop_pose_en",
+            "surface_response_en",
+            "ambient_cycle_en",
+            "state_restore_en",
             "action_en",
             "background_generation_prompt_en",
         ):
@@ -110,6 +113,9 @@ def main() -> int:
         "{setting_notes}",
         "{safe_zone}",
         "{loop_pose}",
+        "{surface_response}",
+        "{ambient_cycle}",
+        "{state_restore}",
         "{action}",
         "{extra_direction}",
     ):
@@ -141,6 +147,9 @@ def main() -> int:
                 "setting_notes": scene.get("setting_notes_en", ""),
                 "safe_zone": scene.get("safe_zone_en", ""),
                 "loop_pose": scene.get("loop_pose_en", ""),
+                "surface_response": scene.get("surface_response_en", ""),
+                "ambient_cycle": scene.get("ambient_cycle_en", ""),
+                "state_restore": scene.get("state_restore_en", ""),
                 "action": scene.get("action_en", ""),
                 "extra_direction": "",
             }
@@ -173,6 +182,7 @@ def main() -> int:
                     "without touch",
                     "without contact",
                     "without entering",
+                    "without sinking",
                     "never enters",
                     "never touches",
                     "visible gap",
@@ -180,6 +190,22 @@ def main() -> int:
                 )
             ):
                 errors.append(f"scene {scene_id}: action must explicitly prohibit prop contact")
+
+            physics_text = " ".join(
+                str(scene.get(key, "")).lower()
+                for key in ("surface_response_en", "ambient_cycle_en", "state_restore_en")
+            )
+            for physics_marker in ("paw", "restore"):
+                if physics_marker not in physics_text:
+                    errors.append(
+                        f"scene {scene_id}: physics details missing required marker {physics_marker}"
+                    )
+            if scene_id == "15":
+                for snow_marker in ("print", "shallow", "reverse", "no extra"):
+                    if snow_marker not in physics_text:
+                        errors.append(
+                            f"scene 15: snow interaction missing required marker {snow_marker}"
+                        )
 
     if errors:
         print("\nValidation failed:", file=sys.stderr)

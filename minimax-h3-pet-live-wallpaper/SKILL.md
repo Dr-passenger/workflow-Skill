@@ -1,6 +1,6 @@
 ---
 name: minimax-h3-pet-live-wallpaper
-description: Create fixed eight-second seamless pet live-wallpaper videos from a user-supplied pet photo with fifteen bundled 16:9 indoor and secure outdoor home backgrounds. Use MiniMax-H3 in full-reference Ref2VA mode, apply low-collision scene actions and hard 0.00/8.00-second loop anchors, preserve pet identity and scene layout, submit and poll the task, download the MP4, and quality-check clipping and loop continuity.
+description: Create fixed eight-second seamless pet live-wallpaper videos from a user-supplied pet photo with fifteen bundled 16:9 indoor and secure outdoor home backgrounds. Use MiniMax-H3 in full-reference Ref2VA mode, apply low-collision actions, material-aware ground response, scene-specific ambient cycles, and hard 0.00/8.00-second loop anchors, then quality-check identity, clipping, physical interaction, and loop continuity.
 ---
 
 # 萌宠动态桌面 Ref2VA 工作流
@@ -45,7 +45,7 @@ description: Create fixed eight-second seamless pet live-wallpaper videos from a
 
 ### 2. 选择场景
 
-读取 `references/scene-presets.json`，按编号匹配背景、`setting_notes_en`、`safe_zone_en`、`loop_pose_en` 和 `action_en`。选择标准：
+读取 `references/scene-presets.json`，按编号匹配背景、`setting_notes_en`、`safe_zone_en`、`loop_pose_en`、`surface_response_en`、`ambient_cycle_en`、`state_restore_en` 和 `action_en`。选择标准：
 
 - 深色宠物优先明亮场景；浅色宠物优先中深色场景，保证轮廓分离。
 - 活泼宠物优先厨房、游戏房、阁楼或工作室；安静宠物优先雨窗、榻榻米或月夜卧室。
@@ -67,12 +67,15 @@ description: Create fixed eight-second seamless pet live-wallpaper videos from a
 
 本工作流将宠物抽象为 `<Subject 1>`、场景抽象为 `<Subject 2>`。图片只用于定义主体与环境，不作为具体关键帧，因此不要额外声明独立的 `<Picture N>` 关键帧条目。`summary` 使用 `[reference generation]`；`retention_analysis` 对两个主体都使用 `fully_preserved`；`detailed_description` 采用单个 `[Shot 1]`，完整描述构图、身份、环境、动作、机位、循环回位和同步声音。
 
-从所选场景的 `setting_notes_en`、`safe_zone_en`、`loop_pose_en`、`action_en` 与顶层 `ref2va_prompt_template_en` 组装提示词，只做必要改动：
+从所选场景的 `setting_notes_en`、`safe_zone_en`、`loop_pose_en`、`surface_response_en`、`ambient_cycle_en`、`state_restore_en`、`action_en` 与顶层 `ref2va_prompt_template_en` 组装提示词，只做必要改动：
 
 - 用照片中可见的真实身份锚点补充 `<Subject 1>`，不要猜测看不清的特征。
 - 动作不符合物种或身体条件时，降级为原地转头、眨眼、隔空嗅闻或沿开阔地面走一至两步。
 - 默认不允许宠物触碰、推动、跨越、进入或躲到道具后方；玩具、隧道、家具和植物保持完全静止并视为实体碰撞边界。
 - 保持宠物与所有道具之间有清晰可见的空气间隙，四肢完整可见，脚掌稳定接触同一地面平面。
+- 只允许提示词明确声明的地面反馈：地毯/榻榻米受压后回弹，瓷砖/木板保持刚性，草叶弯曲后复位，雪地脚印必须与每次脚掌落点同步。
+- 对雨水、树叶、火光、星光投影和玻璃反射使用完整的 8 秒闭环变化；不得随机新增粒子、影子或远离宠物的脚印。
+- 对会改变场景状态的效果写明恢复机制。雪地返程必须踩回同一组脚印，松雪按反向顺序回填，并在 7.00 秒前恢复开场雪面。
 - 固定时间轴：0.00–1.00 秒保持起始锚点；1.00–4.50 秒执行微动作；4.50–7.00 秒沿相同路线反向返回；7.00–8.00 秒恢复并保持起始锚点。
 - 8.00 秒必须匹配 0.00 秒的宠物坐标、比例、姿势、四肢位置、头部方向、目光、耳尾、毛色纹路、接触阴影、道具位置、镜头、光线与背景状态。
 - 始终保留静止机位、单镜头、自然接触阴影、无额外动物、无形变/重复肢体/闪烁/文字/标识。
@@ -109,6 +112,7 @@ python scripts/minimax_h3_wallpaper.py --scene 01 --pet "C:\path\pet.jpg" --back
 
 - 身份：脸型、毛色纹路、眼睛、耳尾和体型与 `<Picture 1>` 一致。
 - 解剖：四肢数量正确、脚掌接地，无粘连、穿模、复制或突然消失；宠物与每个道具之间始终有可见间隙。
+- 物理反馈：压痕、草叶弯曲、雨滴、反射、脚印和接触阴影只在对应接触或环境区域出现，不提前出现、不延迟、不复制到远处。
 - 场景：家具、光线、透视和镜头位置与 `<Picture 2>` 稳定一致，无新增人物或动物。
 - 循环：逐帧比较 0.00 秒与 8.00 秒；宠物位置、姿态、四肢、耳尾、道具、阴影、照明和背景状态必须一致。
 - 桌面体验：运动不抢眼，画面边缘保留可用空间，无文字、标识或水印。
