@@ -73,6 +73,8 @@ def build_prompt(
     duration: int,
     prompt_extra: str | None,
 ) -> str:
+    if duration != 8:
+        raise ValueError("This loop-safe workflow is fixed to exactly 8 seconds")
     templates = presets["ref2va_prompt_template_en"]
     section_order = presets["ref2va_section_order"]
     extra_direction = ""
@@ -81,6 +83,8 @@ def build_prompt(
     values = {
         "duration": duration,
         "setting_notes": scene["setting_notes_en"],
+        "safe_zone": scene["safe_zone_en"],
+        "loop_pose": scene["loop_pose_en"],
         "action": scene["action_en"],
         "extra_direction": extra_direction,
     }
@@ -89,7 +93,32 @@ def build_prompt(
     )
     if len(prompt) > 7000:
         raise ValueError("Final prompt exceeds the MiniMax H3 7000-character limit")
+    validate_ref2va_loop_prompt(prompt)
     return prompt
+
+
+def validate_ref2va_loop_prompt(prompt: str) -> None:
+    section_headers = [
+        "subject_definitions:",
+        "summary:",
+        "retention_analysis:",
+        "detailed_description:",
+        "overall_soundscape:",
+        "non_diegetic_music:",
+    ]
+    positions = [prompt.find(header) for header in section_headers]
+    if any(position < 0 for position in positions) or positions != sorted(positions):
+        raise ValueError("Prompt does not preserve the official Ref2VA six-section order")
+    required_loop_markers = (
+        "0.00 seconds",
+        "8.00 seconds",
+        "final frame must match",
+        "solid collision boundary",
+        "visible air gap",
+    )
+    missing = [marker for marker in required_loop_markers if marker not in prompt]
+    if missing:
+        raise ValueError(f"Prompt is missing hard loop/collision markers: {', '.join(missing)}")
 
 
 def build_payload(
@@ -297,7 +326,13 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--output", help="Output MP4 path")
     parser.add_argument("--resolution", choices=["768P", "2K"], default="2K")
-    parser.add_argument("--duration", type=int, default=8, help="Integer seconds from 4 to 15")
+    parser.add_argument(
+        "--duration",
+        type=int,
+        choices=[8],
+        default=8,
+        help="Fixed 8-second duration for the loop-safe workflow",
+    )
     parser.add_argument(
         "--ratio",
         choices=["21:9", "16:9", "4:3", "1:1", "3:4", "9:16"],
@@ -321,8 +356,6 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    if not 4 <= args.duration <= 15:
-        raise ValueError("--duration must be an integer from 4 to 15")
     if args.poll_interval < 1:
         raise ValueError("--poll-interval must be at least 1 second")
     if args.timeout < 30:
@@ -366,8 +399,16 @@ def main() -> int:
         enhanced_prompt = (context_result.get("content") or {}).get("prompt")
         if not enhanced_prompt:
             raise RuntimeError(f"Context-IR task did not include content.prompt: {context_result}")
-        payload["content"][0]["text"] = enhanced_prompt
-        print("Context-IR prompt enhancement completed.", file=sys.stderr)
+        try:
+            validate_ref2va_loop_prompt(str(enhanced_prompt))
+        except ValueError as exc:
+            print(
+                f"Context-IR omitted a required loop/collision constraint; keeping the validated original prompt: {exc}",
+                file=sys.stderr,
+            )
+        else:
+            payload["content"][0]["text"] = enhanced_prompt
+            print("Context-IR prompt enhancement completed and retained all loop anchors.", file=sys.stderr)
 
     task_id = submit_task(base_url, api_key, "/v2/video_generation", payload)
     print(f"Video task: {task_id}", file=sys.stderr)

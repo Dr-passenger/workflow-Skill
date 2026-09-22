@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "api_model": "MiniMax-H3",
   "model_variant": "H3-Base-Ref2VA",
   "input_mode": "ref2va",
@@ -22,10 +22,10 @@
   ],
   "ref2va_prompt_template_en": {
     "subject_definitions": "<Subject 1> is the user's real household pet in <Picture 1>. <Picture 1> is the sole identity source for the pet's visible species and breed traits, face shape, eyes, ears, coat colors and markings, tail, body proportions, age impression, and any existing collar or clothing.\n<Subject 2> is the home environment in <Picture 2>. <Picture 2> is the sole reference for the scene layout, structures, furnishings, surfaces, materials, lighting direction, perspective, safe activity area, props, and 16:9 composition.",
-    "summary": "[reference generation] The target video is a seamless {duration}-second photorealistic live desktop wallpaper showing <Subject 1> playing gently inside <Subject 2>. The pet identity from <Picture 1> and the complete environment from <Picture 2> remain consistent throughout one continuous locked-off shot, with a loop-friendly return to the opening state.",
-    "retention_analysis": "<Subject 1> (appears in [Shot 1]): fully_preserved - preserve the pet's exact visible identity, species and breed traits, face, eyes, ears, coat colors and markings, tail, body proportions, age impression, and existing accessories without redesign, beautification, duplication, or identity drift.\n<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the referenced room or outdoor-home layout, architecture, furniture, props, materials, perspective, lighting direction, safe boundaries, and 16:9 composition without replacement, relocation, warping, or added people or animals.",
-    "detailed_description": "The target video uses natural photorealism, physically plausible motion, stable fine detail, and calm desktop-wallpaper pacing. It lasts exactly {duration} seconds and contains one uninterrupted shot.\n[Shot 1] A wide, eye-level 16:9 view reproduces <Subject 2> from <Picture 2> with the same camera position, lens perspective, spatial relationships, surface textures, prop placement, light direction, shadow softness, and clear central activity area. {setting_notes} <Subject 1> from <Picture 1> is naturally integrated at believable scale on the central ground plane. Its face, eye color, ear shape, coat pattern boundaries, tail, proportions, age impression, and any existing collar or clothing remain visually identical to the reference. Fur or feathers retain fine texture without smoothing or cosmetic redesign. The pet has realistic weight, stable anatomy, correct limb count for its species, firm ground contact, and soft contact shadows that match <Subject 2>.\nThe action unfolds as a single gentle cycle: {action} Movement remains low to moderate, species-appropriate, continuous, and safe. Paws or feet plant and lift naturally; the torso, head, ears, tail, and coat follow with subtle secondary motion. Props react only through plausible contact and never teleport, multiply, float, or pass through the pet. During the final second, <Subject 1> returns close to its opening position, facing direction, silhouette, and calm pose, while any named toy or movable prop returns close to its initial place. Scene illumination and environmental motion also converge toward the opening state, creating a clean visual loop.\nThe camera is perfectly locked with no cut, zoom, pan, tilt, roll, shake, reframing, lens breathing, or focus pumping. Keep <Subject 1> fully within the safe central area and leave calm visual space near the frame edges for desktop icons. Only the pet, named toy, and scene-appropriate small ambient elements such as curtains, leaves, rain, snow, plants, or firelight may move subtly. Do not introduce people, another animal, a duplicate pet, new accessories, new furniture, or unrequested objects. Prevent morphing, coat-pattern drift, facial drift, extra or fused limbs, floating paws, sudden scale changes, texture crawling, scene warping, flicker, strobing, captions, visible text, logos, and watermarks. {extra_direction}",
-    "overall_soundscape": "Extremely subtle scene-appropriate room tone or outdoor ambience continues throughout, with soft pet-safe foley synchronized to footfalls and gentle toy contact. No voices, speech, barking, meowing, loud impacts, or distracting sound effects.",
+    "summary": "[reference generation] The target video is an exactly {duration}-second seamless photorealistic live desktop wallpaper showing <Subject 1> making one small, low-risk movement cycle inside <Subject 2>. The pet identity from <Picture 1> and the complete environment from <Picture 2> remain fully consistent in one locked-off shot. The frame at 8.00 seconds must visually match the frame at 0.00 seconds.",
+    "retention_analysis": "<Subject 1> (appears in [Shot 1]): fully_preserved - preserve the pet's exact visible identity, species and breed traits, face, eyes, ears, coat colors and markings, tail, body proportions, age impression, existing accessories, anatomy, scale, and ground contact without redesign, duplication, identity drift, or intersection with the environment.\n<Subject 2> (appears in [Shot 1]): fully_preserved - preserve the referenced room or outdoor-home layout, architecture, furniture, props, materials, perspective, lighting, shadows, safe boundaries, and 16:9 composition without replacement, relocation, deformation, moving props, or added people or animals. The complete scene state at 8.00 seconds matches 0.00 seconds.",
+    "detailed_description": "The target video is one uninterrupted, photorealistic, locked-off 16:9 shot lasting exactly {duration} seconds.\n[Shot 1] Reproduce <Subject 2> from <Picture 2> with unchanged camera position, perspective, layout, textures, prop placement, lighting, and shadows. {setting_notes} {safe_zone} Every surface, piece of furniture, tunnel, toy, plant, fence, and decoration is a solid collision boundary and remains static.\nPlace <Subject 1> from <Picture 1> at believable scale on the visible ground plane. Preserve its face, eyes, ears, coat colors and pattern boundaries, tail, proportions, age impression, and existing accessories. Keep stable anatomy, correct limb count, planted paws or feet, realistic weight, and a matching contact shadow. No body part may intersect, enter, pass behind, merge with, or emerge from any object. Maintain a clearly visible air gap from every prop.\nAt exactly 0.00 seconds, establish this loop anchor: {loop_pose} From 0.00 to 1.00 seconds, hold the anchor with only subtle breathing and one blink. From 1.00 to 4.50 seconds, perform this low-collision action: {action} Keep the motion slow, species-appropriate, and fully visible; no jump, pounce, spin, tunnel entry, furniture occlusion, or object contact. From 4.50 to 7.00 seconds, reverse the same short route in the opposite order and at the same pace. Replant each paw or foot on its previous position, undo the head movement, and restore the opening orientation without teleporting or sliding. From 7.00 to 8.00 seconds, hold the opening anchor again with the same breathing and blink state.\nAt exactly 8.00 seconds, the final frame must match the 0.00-second frame: identical pet coordinates, scale, silhouette, joints, paw placement, head, gaze, ears, tail, coat pattern, contact shadow, camera, crop, focus, props, lighting, reflections, particles, and background. Keep the camera perfectly locked with no cut, zoom, pan, tilt, roll, shake, reframing, lens breathing, or focus pumping. Add no people, animals, duplicate pet, accessories, furniture, or objects. Prevent identity drift, morphing, clipping, penetration, extra or fused limbs, floating paws, scale changes, texture crawling, warping, flicker, text, logos, and watermarks. {extra_direction}",
+    "overall_soundscape": "Extremely subtle scene-appropriate room tone or outdoor ambience continues at a constant level, with only quiet synchronized footsteps and breathing. No toy-contact sounds, voices, speech, barking, meowing, loud impacts, or distracting effects. The ambience at 8.00 seconds matches 0.00 seconds.",
     "non_diegetic_music": "N/A"
   },
   "scenes": [
@@ -34,9 +34,11 @@
       "slug": "sunny-scandinavian-living-room",
       "title_zh": "北欧阳光客厅",
       "background": "assets/backgrounds/01-sunny-scandinavian-living-room.png",
-      "action_zh": "追逐柔和色小球，穿过布艺隧道，再回到地毯中央的起始姿势。",
+      "action_zh": "在地毯中央注视小球，沿开阔弧线走两步，隔空嗅闻后原路返回；全程不接触小球或隧道。",
       "setting_notes_en": "Keep the cream sofa, pale oak floor, round rug, woven basket, pastel ball, fabric tunnel, garden window, and soft morning shadows unchanged.",
-      "action_en": "The pet notices the pastel ball, gives it two gentle taps, follows it across the round rug, briefly passes through the fabric tunnel, then curves back and settles into the opening pose near the rug center as the ball rolls back close to its initial spot.",
+      "safe_zone_en": "Keep the pet on the unobstructed front half of the round rug, with a clear one-body-width buffer from the sofa, basket, ball, tunnel, rug edge, and window wall.",
+      "loop_pose_en": "The pet stands at the center-front of the round rug, body angled about 30 degrees to camera-right, all paws or feet planted, head level toward the camera, and tail held in its natural resting shape.",
+      "action_en": "The pet turns its head toward the pastel ball, takes exactly two small steps along the open front arc of the rug, stops with a clearly visible one-paw-length air gap before the ball, lowers its nose briefly as if smelling from a distance, and pauses without touching the ball or tunnel.",
       "background_generation_prompt_en": "Photorealistic empty cozy Scandinavian living room for a playful household pet, cream sofa, pale oak floor, soft round rug, low pet-safe woven basket, one small pastel ball and fabric tunnel, bright window to a leafy garden, 16:9 eye-level wide static shot, generous clear activity area centered on the rug, soft sunny morning light, environment only, no pets, animals, people, portraits, animal statues, text, logos, watermarks, motion blur, or fisheye distortion."
     },
     {
@@ -44,9 +46,11 @@
       "slug": "japanese-tatami-room",
       "title_zh": "日式榻榻米房",
       "background": "assets/backgrounds/02-japanese-tatami-room.png",
-      "action_zh": "轻拨红色毛线球并小幅扑跃，最后回到榻榻米上的起点。",
+      "action_zh": "在中央榻榻米上观察毛线球，斜向走两步并短暂抬起前爪，再沿原路返回；不碰毛线球、逗猫棒或桌垫。",
       "setting_notes_en": "Keep the shoji doors, tatami grid, low table, cushions, red yarn ball, feather wand, courtyard view, and late-morning sunlight unchanged.",
-      "action_en": "The pet quietly sniffs the red yarn ball, taps it across one tatami panel, makes one small playful pounce, pauses to watch the feather wand tremble slightly, then pads back to the original panel and resumes the opening pose while the yarn ball returns close to its starting point.",
+      "safe_zone_en": "Confine the pet to one unobstructed central tatami panel and keep a clear one-body-width gap from the low table, cushions, yarn ball, feather wand, shoji doors, and panel seams near furniture.",
+      "loop_pose_en": "The pet stands squarely inside the central tatami panel, body angled slightly to camera-left, feet fully inside the panel border, head level toward the camera, and tail in a relaxed natural curve.",
+      "action_en": "The pet turns its gaze toward the red yarn ball, takes exactly two short diagonal steps while remaining inside the same tatami panel, stops with a visible air gap, raises one front paw briefly above its own floor position, replaces that paw on the same spot, and pauses without contacting the yarn ball or feather wand.",
       "background_generation_prompt_en": "Photorealistic empty Japanese tatami living room prepared for a household pet to play, shoji doors, low walnut table pushed aside, zabuton cushions, tiny red yarn ball and feather wand on tatami, room opening to a small green courtyard, 16:9 eye-level wide static shot, broad uncluttered central play zone, clear late-morning diffused daylight, no pets, animals, people, portraits, animal motifs, text, logos, watermarks, motion blur, or fisheye."
     },
     {
@@ -54,9 +58,11 @@
       "slug": "rainy-window-nook",
       "title_zh": "雨日下午窗边客厅",
       "background": "assets/backgrounds/03-rainy-window-nook.png",
-      "action_zh": "从柔软毯子隧道探头，轻推毛球，再回到毯子旁休息。",
+      "action_zh": "在开阔地毯上看向雨窗，沿窗户平行方向走两步并轻轻歪头，再原路返回；不接触毯子隧道、沙发或毛球。",
       "setting_notes_en": "Keep the deep green sofa, knitted throws, warm wood floor, blanket tunnel, plush ball, rain-streaked window, city-garden bokeh, and warm lamps unchanged.",
-      "action_en": "The pet peeks out from beside the soft blanket tunnel, steps onto the rug, gently nudges the plush ball once, watches it roll a short distance, stretches naturally, then returns beside the tunnel and settles into nearly the same restful opening pose. Rain continues softly at a constant rate outside.",
+      "safe_zone_en": "Keep the pet on the open middle strip of the rug, at least one body width from the sofa base, blanket tunnel, plush ball, window, lamp stands, and rug edges.",
+      "loop_pose_en": "The pet stands on the center of the open rug strip, body parallel to the window, head turned gently toward the camera, all paws or feet visible, and tail resting in its natural reference shape.",
+      "action_en": "The pet turns its head toward the rain-streaked window, takes exactly two slow steps parallel to the window across the unobstructed rug, pauses for a small natural head tilt, and keeps a clearly visible gap from the blanket tunnel, sofa, and plush ball.",
       "background_generation_prompt_en": "Cinematic photorealistic empty cozy living-room window nook on a rainy afternoon, deep green sofa, warm knitted throws, low wooden floor, soft blanket tunnel and one plush ball, large rain-streaked window with blurred city garden, 16:9 locked wide shot with clear foreground floor and darker desktop-friendly corners, warm amber lamps against cool rainy daylight, no pets, animals, people, portraits, animal decor, text, logos, watermarks, motion blur, or fisheye."
     },
     {
@@ -64,9 +70,11 @@
       "slug": "sunny-family-kitchen",
       "title_zh": "阳光家庭厨房",
       "background": "assets/backgrounds/04-sunny-family-kitchen.png",
-      "action_zh": "追着益智漏食玩具和蓝色小球小跑，绕一圈后回到前景。",
+      "action_zh": "沿厨房前景的清晰砖缝缓慢走两步，隔空观察蓝球后原路返回；不接触玩具、橱柜、中岛或门。",
       "setting_notes_en": "Keep the white shaker cabinets, island, terracotta tiles, garden door, rolling treat puzzle, blue ball, and golden breakfast sunlight unchanged.",
-      "action_en": "The pet gives the rolling treat puzzle a curious nudge, trots after it for a short safe distance, redirects toward the soft blue ball, makes a gentle semicircle across the open foreground lane, then returns to the starting floor tile and calm opening stance as both toys settle near their original places.",
+      "safe_zone_en": "Use only the clear foreground lane across the terracotta tiles and maintain a visible one-body-width buffer from the island, cabinets, garden door, rolling treat puzzle, blue ball, and every kickboard.",
+      "loop_pose_en": "The pet stands centered on one unobstructed foreground tile, body aligned with the grout line and angled slightly to camera-left, all paws or feet planted within the tile, head facing the camera, and tail relaxed.",
+      "action_en": "The pet turns its gaze toward the blue ball, follows one straight grout line for exactly two slow steps, stops with a clear one-body-width gap before any toy, lowers its head slightly to observe from a distance, and pauses without touching the blue ball or treat puzzle.",
       "background_generation_prompt_en": "Bright photorealistic empty sunlit family kitchen with white shaker cabinets, warm terracotta floor, breakfast island, back door to a small garden, tiny rolling treat puzzle and soft blue ball on the open floor, 16:9 low eye-level static wide shot with a broad uncluttered foreground running lane, golden breakfast sunlight and crisp gentle shadows, no pets, animals, people, portraits, floor food, text, logos, watermarks, motion blur, or fisheye."
     },
     {
@@ -74,9 +82,11 @@
       "slug": "botanical-sunroom",
       "title_zh": "植物阳光房",
       "background": "assets/backgrounds/05-botanical-sunroom.png",
-      "action_zh": "追随光斑和叶形玩具，轻快探索后回到藤编垫中央。",
+      "action_zh": "在藤编垫内缓慢走两步，观察叶形玩具并隔空嗅闻，再沿相同足迹返回；不碰玩具、植物、椅子或玻璃。",
       "setting_notes_en": "Keep the glass walls, rattan chair, high and out-of-reach greenery, stone floor, woven mat, leaf-shaped toy, garden view, and dappled sunlight unchanged.",
-      "action_en": "The pet follows a slowly shifting patch of sunlight across the woven mat, gives the lightweight leaf-shaped toy two soft taps, performs one small playful turn, then returns to the mat center and the same attentive opening pose. Plant leaves move only slightly in a gentle indoor breeze.",
+      "safe_zone_en": "Keep the pet completely within the inner half of the woven mat, leaving a visible one-body-width gap from the rattan chair, leaf-shaped toy, plant pots, stone-floor edge, and glass walls.",
+      "loop_pose_en": "The pet stands at the center of the woven mat, body facing three-quarters toward camera-right, head level toward the camera, all paws or feet planted, and tail resting naturally without touching the mat edge.",
+      "action_en": "The pet turns its head toward the leaf-shaped toy, takes exactly two small steps across the inner mat, stops with a clear air gap before the toy, makes one gentle sniffing motion from a distance, and pauses without contacting the toy, chair, plants, or glass.",
       "background_generation_prompt_en": "Premium photorealistic empty indoor home conservatory, rattan chair, abundant pet-safe-looking greenery placed out of reach, stone floor, woven mat and one lightweight leaf-shaped toy, glass walls overlooking a lush backyard, 16:9 eye-level locked wide shot with open central space and layered depth, dappled afternoon sun, no pets, animals, people, portraits, animal-shaped objects, text, logos, watermarks, motion blur, or fisheye."
     },
     {
@@ -84,9 +94,11 @@
       "slug": "pastel-pet-playroom",
       "title_zh": "马卡龙萌宠游戏房",
       "background": "assets/backgrounds/06-pastel-pet-playroom.png",
-      "action_zh": "穿过布隧道、踏上软垫台阶、拨动毛毡球，再回到起点。",
+      "action_zh": "在图案地毯的开阔区域横向走三小步，观察毛毡球后停顿，再沿原路返回；不进入隧道、不踏台阶、不碰球。",
       "setting_notes_en": "Keep the pastel storage cubes, rounded soft modules, low steps, fabric tunnel, two felt balls, pale wood floor, patterned rug, and bright overcast daylight unchanged.",
-      "action_en": "The pet enters the collapsible fabric tunnel, emerges onto the patterned rug, places its front paws on the lowest soft step, gently bats one felt ball, then follows a smooth curved path back to the tunnel entrance and returns to the opening pose as the ball settles near its starting mark.",
+      "safe_zone_en": "Use only the unobstructed front-middle area of the patterned rug and keep a clear one-body-width buffer from the fabric tunnel, felt balls, low steps, soft modules, storage cubes, and rug boundary.",
+      "loop_pose_en": "The pet stands on a clearly visible central motif of the patterned rug, body side-on toward camera-right, head turned toward the camera, all paws or feet fully visible, and tail held in a relaxed reference-consistent shape.",
+      "action_en": "The pet looks toward the nearer felt ball, takes exactly three very small sideways steps across the open rug area, stops with a visible air gap from every object, makes one mild curious head tilt, and pauses without entering the tunnel, climbing a step, or touching either ball.",
       "background_generation_prompt_en": "Polished photorealistic empty whimsical pet playroom inside a real home, soft modular cushions, low climbing steps, collapsible fabric tunnel, two simple felt balls, pastel storage cubes, rounded safe furniture and pale wood floor, 16:9 eye-level static wide shot with spacious central play zone, bright overcast daylight and candy-pastel accents, no pets, animals, people, portraits, animal graphics, text, logos, watermarks, motion blur, or fisheye."
     },
     {
@@ -94,9 +106,11 @@
       "slug": "winter-holiday-living-room",
       "title_zh": "冬日节日客厅",
       "background": "assets/backgrounds/07-winter-holiday-living-room.png",
-      "action_zh": "轻拨红色布球和缎带，在安全距离内玩耍后回到地毯起点。",
+      "action_zh": "在羊毛地毯中央看向红球，沿安全弧线走两步并停顿，再原路返回；不接触球、缎带、圣诞树或壁炉护栏。",
       "setting_notes_en": "Keep the decorated tree, protected fireplace, wool rug, red fabric ball, curled ribbon, snowy blue-hour window, and warm holiday lights unchanged. The pet must remain safely far from the fire screen and tree.",
-      "action_en": "The pet gently taps the red fabric ball, follows it across a short section of the wool rug, paws once at the curled ribbon without biting or tangling in it, then circles back to the opening spot and pose as the ball and ribbon settle nearly where they began. Firelight and string lights flicker very subtly and consistently.",
+      "safe_zone_en": "Keep the pet within the empty center of the wool rug, at least one full body length from the fire screen, tree skirt, red ball, ribbon, furniture legs, and rug edges.",
+      "loop_pose_en": "The pet stands at the center of the wool rug, body angled three-quarters to camera-left, head facing the camera, all paws or feet evenly planted, and tail resting naturally away from the ribbon.",
+      "action_en": "The pet turns its gaze toward the red fabric ball, follows a shallow two-step arc across the empty rug center, stops with a clear one-body-length gap from the ball and ribbon, lifts its chin in a brief attentive look, and pauses without touching any decoration or approaching the fire screen or tree.",
       "background_generation_prompt_en": "Cinematic photorealistic empty cozy winter holiday living room, tasteful decorated tree at the edge, fireplace protected by a low safety screen, wool rug, red fabric ball and crinkly gift ribbon on the rug, snow outside at blue hour, 16:9 eye-level locked wide shot with uncluttered central rug and subtle darker margins for icons, warm firelight and golden string lights, no pets, animals, people, portraits, animal ornaments, readable tags, text, logos, watermarks, motion blur, or fisheye."
     },
     {
@@ -104,9 +118,11 @@
       "slug": "golden-hour-loft",
       "title_zh": "金色夕阳阁楼客厅",
       "background": "assets/backgrounds/08-golden-hour-loft.png",
-      "action_zh": "探索纸箱洞口、追一小段黄球，再绕回纸箱旁的起始位置。",
+      "action_zh": "在几何地毯开阔处走两步，远距离观察纸箱洞口和黄球后停顿，再沿相同足迹返回；不接触或进入纸箱。",
       "setting_notes_en": "Keep the exposed brick, charcoal sofa, wood floor, geometric rug, cardboard play box, yellow ball, skyline windows, and long golden sunbeams unchanged.",
-      "action_en": "The pet sniffs one round opening of the cardboard play box, peeks partly inside, notices the yellow ball and nudges it into a short roll, follows it in a gentle arc across the rug, then returns beside the same box opening and resumes the calm opening pose while the ball rolls close to its initial position.",
+      "safe_zone_en": "Keep the pet on the unobstructed middle of the geometric rug, with a clear one-body-width buffer from the cardboard box, yellow ball, sofa, rug edge, brick wall, and windows.",
+      "loop_pose_en": "The pet stands on the central geometric shape of the rug, body facing slightly toward camera-right, head toward the camera, all paws or feet visible and planted, and tail in its natural resting shape.",
+      "action_en": "The pet turns its head toward the cardboard-box opening, takes exactly two slow steps along an open geometric line on the rug, stops with a visible air gap from both the box and yellow ball, sniffs the air once from a distance, and pauses without touching or entering the box.",
       "background_generation_prompt_en": "High-end photorealistic empty modern loft living room at golden hour, exposed brick, low charcoal sofa, warm wood floor, soft geometric rug, cardboard play box with round openings and a yellow tennis-size pet ball, tall windows with subtle skyline, 16:9 eye-level static wide shot with strong depth and clear foreground activity area, no pets, animals, people, portraits, animal art, text, logos, watermarks, motion blur, or fisheye."
     },
     {
@@ -114,9 +130,11 @@
       "slug": "moonlit-bedroom-lounge",
       "title_zh": "月夜星光卧室",
       "background": "assets/backgrounds/09-moonlit-bedroom-lounge.png",
-      "action_zh": "温柔拨动发光球、伸展并趴下，最后恢复平静起始姿势。",
+      "action_zh": "在柔软地毯中央看向发光球，向侧前方走两小步并轻轻歪头，再原路返回；不碰球、坐垫、床或窗帘。",
       "setting_notes_en": "Keep the low upholstered bed, plush rug, floor cushions, small glowing ball, curtains, moonlit window, blue-lavender palette, and subtle star projection unchanged.",
-      "action_en": "The pet approaches the small glowing ball, taps it softly once so it rolls only a short distance, follows with two quiet steps, performs a relaxed stretch, then returns to the starting rug position and settles into nearly the same calm pose. The star projection drifts imperceptibly and returns to the opening pattern by the end.",
+      "safe_zone_en": "Keep the pet on the clear center of the plush rug, leaving a visible one-body-width gap from the glowing ball, floor cushions, bed frame, curtains, window wall, and rug edges.",
+      "loop_pose_en": "The pet stands calmly at the rug center, body angled slightly to camera-left, head level toward the camera, all paws or feet planted and unobscured, and tail resting in its natural reference position.",
+      "action_en": "The pet turns its eyes and head toward the glowing ball, takes one small step sideways and one small step forward within the clear rug center, stops with a visible air gap, makes one gentle curious head tilt, and pauses without touching the ball, cushions, bed, or curtains.",
       "background_generation_prompt_en": "Cinematic photorealistic empty moonlit bedroom lounge with safe star projector, low upholstered bed in the background, plush rug, soft floor cushions and a tiny glowing ball toy, curtains partly open to a deep blue sky, 16:9 low eye-level locked wide shot with clear central rug and balanced negative space, dreamy blue moonlight and lavender highlights, no pets, animals, people, portraits, animal decor, text, logos, watermarks, motion blur, or fisheye."
     },
     {
@@ -124,9 +142,11 @@
       "slug": "neon-home-studio",
       "title_zh": "蓝橙氛围家庭工作室",
       "background": "assets/backgrounds/10-neon-home-studio.png",
-      "action_zh": "追逐发光球、进入布隧道再探头，结尾回到地毯起始点。",
+      "action_zh": "沿深色地毯中线走两小步，观察蓝色发光球并停顿，再原路返回；不进入隧道、不碰球、桌子或植物。",
       "setting_notes_en": "Keep the wood acoustic slats, compact back-wall desk, dark rug, fabric tunnel, blue light-up ball, plants, and restrained cyan-and-amber practical lighting unchanged.",
-      "action_en": "The pet watches the blue light-up ball roll slowly along the rug edge, follows it at an easy trot, slips briefly into the fabric tunnel and peeks out, then returns along a gentle curve to the opening position on the rug while the ball rolls back close to its initial mark. Accent lights remain stable without pulsing.",
+      "safe_zone_en": "Use only the unobstructed center strip of the dark rug and maintain a clear one-body-width buffer from the fabric tunnel, light-up ball, desk, chair, plants, wall slats, and rug edges.",
+      "loop_pose_en": "The pet stands on the rug centerline, body parallel to the tunnel but facing camera-right, head turned toward the camera, all paws or feet planted, and tail relaxed without crossing the rug edge.",
+      "action_en": "The pet turns its head toward the blue light-up ball, takes exactly two measured steps along the rug centerline parallel to the tunnel, stops with a clearly visible gap from both ball and tunnel, pauses for one attentive blink, and never enters or touches the tunnel or any prop.",
       "background_generation_prompt_en": "Premium photorealistic empty cozy home studio lounge with tasteful cyan and warm amber accent lights, acoustic wood slats, compact desk at the back wall, soft dark rug, small rolling light-up pet ball and fabric tunnel, clean modern apartment hobby room, 16:9 eye-level locked wide shot with spacious central floor and darker upper corners for desktop icons, no pets, animals, people, portraits, screen content, text, logos, watermarks, motion blur, or fisheye."
     },
     {
@@ -134,9 +154,11 @@
       "slug": "fenced-spring-backyard",
       "title_zh": "春日围栏后院",
       "background": "assets/backgrounds/11-fenced-spring-backyard.png",
-      "action_zh": "穿过短隧道、轻追橙色软球，在草坪上绕小圈后回到起点。",
+      "action_zh": "在中央草坪沿浅弧线慢走三步，远距离看向橙球后停顿，再沿草地足迹返回；不进入隧道、不碰球或花坛。",
       "setting_notes_en": "Keep the fully closed timber fence and gate, green lawn, stepping-stone path, flower borders, short blue-and-orange agility tunnel, orange soft ball, house exterior, and spring-morning shadows unchanged. Keep the pet in the central lawn, far from the fence and plants.",
-      "action_en": "The pet crosses the central lawn at an easy playful trot, passes once through the short agility tunnel, gently taps the orange ball into a brief roll, follows a small curved path, then returns to the opening position and pose as the ball settles close to its starting spot. Flowers and tree leaves move only slightly in a gentle breeze.",
+      "safe_zone_en": "Keep the pet inside a clear central-lawn oval, at least one full body length from the agility tunnel, orange ball, stepping stones, flower borders, fence, gate, house wall, and all shrubs.",
+      "loop_pose_en": "The pet stands at the center of the lawn oval, body facing three-quarters toward the house and slightly to camera-left, head toward the camera, all paws or feet visible, and tail held naturally.",
+      "action_en": "The pet turns its gaze toward the orange ball, takes exactly three slow steps along a shallow open-lawn arc, stops with a clear one-body-length gap from every prop and boundary, raises its head for a brief alert look, and pauses without entering the tunnel or touching the ball, stones, or plants.",
       "background_generation_prompt_en": "Premium photorealistic empty secure private backyard garden for a household pet, freshly cut lawn, curved stepping-stone path, low flower borders, short fabric agility tunnel and one soft orange ball, fully fenced residential garden behind a warm modern home, closed gate and no road visible, 16:9 low eye-level locked wide shot with broad central lawn and clean margins, clear spring morning, no pets, animals, birds, insects, people, portraits, animal statues, text, logos, watermarks, poisonous-looking plants, motion blur, or fisheye."
     },
     {
@@ -144,9 +166,11 @@
       "slug": "sunset-rooftop-terrace",
       "title_zh": "夕阳安全屋顶露台",
       "background": "assets/backgrounds/12-sunset-rooftop-terrace.png",
-      "action_zh": "在圆形地毯上轻推黄球、绕一小圈，再回到地毯中央。",
+      "action_zh": "在圆形地毯内沿小弧线走两步，望向夕阳后停顿，再原路返回；不碰黄球、座椅、花盆或安全围栏。",
       "setting_notes_en": "Keep the timber deck, pergola, outdoor bench, planters, high glass-and-slat safety enclosure, round rug, yellow soft ball, skyline, sunset, and warm practical lights unchanged. The pet must stay on the rug and central deck, far from every terrace edge.",
-      "action_en": "The pet notices the yellow soft ball on the round rug, gives it two gentle taps, follows it around a small circle entirely on the rug, pauses to look toward the sunset, then returns to the opening pose near the rug center while the ball settles close to its original position.",
+      "safe_zone_en": "Keep the pet inside the inner half of the round rug, at least one full body length from the yellow ball, bench, planters, pergola posts, glass-and-slat enclosure, deck edge, and every terrace boundary.",
+      "loop_pose_en": "The pet stands exactly at the round-rug center, body angled about 30 degrees to camera-right, head toward the camera, all paws or feet planted inside the central circle, and tail in a relaxed natural curve.",
+      "action_en": "The pet turns its head briefly toward the sunset, takes exactly two small clockwise steps along an inner-rug arc, stops while maintaining a clear air gap from the yellow ball and all furniture, returns its gaze toward the camera, and pauses without touching any object or nearing the terrace enclosure.",
       "background_generation_prompt_en": "High-end photorealistic empty pet-safe apartment rooftop terrace at sunset, timber deck, pergola, cushioned outdoor bench, planters behind secure high glass-and-slat barriers, round outdoor rug and one yellow soft ball, distant skyline, every edge fully enclosed, 16:9 eye-level locked wide shot with open central deck and darker corners for icons, warm golden hour and soft amber practical lights, no pets, animals, birds, people, portraits, animal decor, text, logos, watermarks, open ledges, gaps, motion blur, or fisheye."
     },
     {
@@ -154,9 +178,11 @@
       "slug": "rainy-covered-patio",
       "title_zh": "雨天有顶后院露台",
       "background": "assets/backgrounds/13-rainy-covered-patio.png",
-      "action_zh": "在干燥木平台上拨动蓝球、闻一闻绳结玩具，再回到灯下休息。",
+      "action_zh": "在有顶木平台的干燥中线走两步，远距离观察蓝球和绳结玩具，再原路返回；不碰玩具、沙发、花盆或湿滑边缘。",
       "setting_notes_en": "Keep the covered timber patio, dry central deck, outdoor sofa, folded throws, safe planters, blue rubber ball, loose rope toy, closed garden gate, rain-wet fenced lawn, and warm wall lamps unchanged. The pet remains under the covered roof.",
-      "action_en": "The pet walks calmly across the dry deck, nudges the blue ball into a short roll, briefly sniffs the loose rope toy without chewing or tangling in it, then turns back and settles into the opening pose under the warm wall lamp. Rain falls steadily beyond the roof at a constant gentle rate.",
+      "safe_zone_en": "Keep the pet on the dry unobstructed center boards beneath the roof, with a clear one-body-width gap from the sofa, throws, planters, blue ball, rope toy, roof posts, wet deck edge, lawn, and closed gate.",
+      "loop_pose_en": "The pet stands beneath the warm wall lamp on one marked dry center board, body aligned with the deck boards and angled to camera-left, head toward the camera, all paws or feet planted, and tail relaxed.",
+      "action_en": "The pet turns its gaze toward the blue ball and rope toy, takes exactly two slow steps forward along the same dry deck board, stops with a clearly visible air gap from both toys, sniffs the air once from a distance, and pauses without touching furniture, toys, plants, posts, or the wet edge.",
       "background_generation_prompt_en": "Cinematic photorealistic empty covered backyard wooden patio on a gentle rainy afternoon, dry timber deck, outdoor sofa, folded throws, safe potted greenery, small blue rubber ball and loose pet-safe rope toy, patio opening toward a fully fenced rain-wet garden with closed gate, 16:9 low eye-level locked wide shot from beneath the roof with generous dry central floor, warm lamps against cool rainy daylight, no pets, animals, birds, insects, people, portraits, animal-shaped objects, text, logos, watermarks, deep puddles, motion blur, or fisheye."
     },
     {
@@ -164,9 +190,11 @@
       "slug": "autumn-enclosed-courtyard",
       "title_zh": "秋日封闭庭院",
       "background": "assets/backgrounds/14-autumn-enclosed-courtyard.png",
-      "action_zh": "轻扑落叶堆、拨动酒红毛毡球并穿过隧道，最后回到砖地起点。",
+      "action_zh": "在庭院中央砖地斜向走两步，观察落叶堆和酒红毛毡球后停顿，再原路返回；不碰落叶、球、隧道或长椅。",
       "setting_notes_en": "Keep the warm brick paving, maple canopy, tidy leaf pile, wooden bench, short fabric tunnel, burgundy felt ball, masonry walls, closed wooden gate, and amber late-afternoon sunlight unchanged.",
-      "action_en": "The pet makes one gentle playful step into the edge of the crisp leaf pile, bats the burgundy felt ball once, passes through the short tunnel, then follows a small arc back to the opening brick-paving position and pose as the ball and loose leaves settle nearly where they began. Only a few leaves drift softly.",
+      "safe_zone_en": "Use only the clear central brick-paving rectangle and keep a visible one-body-width buffer from the leaf pile, burgundy ball, fabric tunnel, bench legs, masonry walls, closed gate, and courtyard edges.",
+      "loop_pose_en": "The pet stands on the center brick of the open rectangle, body angled three-quarters to camera-right, head level toward the camera, all paws or feet contained within adjacent clear bricks, and tail resting naturally.",
+      "action_en": "The pet turns its head toward the leaf pile and burgundy ball, takes exactly two short diagonal steps across the open bricks, stops with a clear air gap before all loose leaves and props, makes one small curious head tilt, and pauses without touching the leaves, ball, tunnel, bench, wall, or gate.",
       "background_generation_prompt_en": "Cinematic photorealistic empty enclosed autumn home courtyard, warm brick paving, low maple trees, tidy pile of crisp fallen leaves, wooden bench, small fabric tunnel and burgundy felt ball, secure walls and closed wooden gate with no road visible, 16:9 eye-level locked wide shot with clear central leaf-play area and uncluttered edges, soft late-afternoon October sunlight, no pets, animals, birds, people, portraits, animal ornaments, Halloween text, logos, watermarks, open gates, motion blur, or fisheye."
     },
     {
@@ -174,9 +202,11 @@
       "slug": "snowy-fenced-backyard",
       "title_zh": "冬日雪地围栏后院",
       "background": "assets/backgrounds/15-snowy-fenced-backyard.png",
-      "action_zh": "沿清扫小径走到红球旁、轻推红球并探入隧道，再回到门廊前。",
+      "action_zh": "沿门廊前已清扫的小径慢走三步，远距离观察红球后停顿，再沿相同足迹返回；不踩雪、不碰球、隧道或灌木。",
       "setting_notes_en": "Keep the covered porch, shoveled curved path, soft fresh snow, evergreen shrubs, closed timber fence and gate, red fabric ball, short red play tunnel, blue sky, and warm window glow unchanged. Keep the pet away from icy edges and deep snow.",
-      "action_en": "The pet follows the shoveled path at a gentle pace, steps onto the shallow snow edge to tap the red fabric ball once, briefly peeks into the weatherproof tunnel, then returns along the same path to the opening pose near the porch as the ball settles close to its initial spot. Snow remains calm with no falling storm and no accumulating tracks that break the loop.",
+      "safe_zone_en": "Keep the pet entirely on the wide cleared section of the path nearest the porch, at least one full body length from snowbanks, icy edges, red ball, play tunnel, shrubs, fence, gate, porch posts, and path boundaries.",
+      "loop_pose_en": "The pet stands on the cleared path marker nearest the porch, body aligned with the path and angled slightly to camera-right, head toward the camera, all paws or feet on dry paving, and tail in its natural resting shape.",
+      "action_en": "The pet looks toward the red ball, takes three steps along the cleared path centerline, stops with a visible one-body-length air gap before the ball and snow edge, raises its head briefly, and pauses without entering snow, touching the ball, approaching the tunnel, or brushing any shrub.",
       "background_generation_prompt_en": "Premium photorealistic empty secure snowy backyard on a bright winter morning, fresh soft snow, shoveled curved path from a covered porch, low evergreen shrubs, pet-safe red fabric ball and short weatherproof play tunnel, fully fenced private garden with closed gate and no road visible, 16:9 low eye-level locked wide shot with open central play area and clean sky margins, crisp blue-white daylight with warm window glow, no pets, animals, birds, people, portraits, animal tracks, animal decor, text, logos, watermarks, blizzard, ice hazards, open water, motion blur, or fisheye."
     }
   ]

@@ -85,12 +85,12 @@ N/A
 
 Use `<Subject N>` for reusable visible content such as the pet and environment. Because both pictures only define subjects in this workflow and are not concrete first/key/last frames, cite `<Picture 1>` and `<Picture 2>` inside the corresponding subject definitions rather than creating standalone picture entries. Keep every label's meaning consistent across all six sections.
 
-For generation tasks, the official guide normally targets a detailed 350–500 English-word `detailed_description`. A single shot still needs explicit composition, subject appearance and position, environment and lighting, action and state changes, camera behavior, current sound, and where references take effect.
+For generation tasks, the official guide normally targets a detailed 350–500 English-word `detailed_description`. A single shot still needs explicit composition, subject appearance and position, environment and lighting, action and state changes, camera behavior, current sound, and where references take effect. This workflow also inserts a fixed 8-second action timeline, scene-specific safe zone, solid collision boundaries, visible prop clearance, and matching 0.00/8.00-second loop anchors.
 
 ## Current request limits
 
 - Resolution: `768P` or `2K` for `MiniMax-H3`.
-- Duration: integer `4`–`15` seconds.
+- Duration: the API accepts integer `4`–`15` seconds, but this workflow deliberately fixes every request to `8` seconds so its action and return timing remain valid.
 - Ratio: Ref2VA accepts `adaptive`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, or `9:16`; use `16:9` for desktop wallpaper.
 - Images: JPG/JPEG/PNG/WEBP/HEIC/HEIF, at most 30 MB each, dimensions 256–5760 px, aspect ratio 0.4–2.5, up to nine reference images.
 - Entire JSON request: at most 64 MB. Prefer public URLs for large media; this skill uses Base64 data URIs for ordinary local photos and bundled backgrounds.

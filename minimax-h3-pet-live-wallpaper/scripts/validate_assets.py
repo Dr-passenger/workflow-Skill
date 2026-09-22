@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import struct
 import sys
 from pathlib import Path
@@ -46,6 +47,8 @@ def main() -> int:
             "background",
             "action_zh",
             "setting_notes_en",
+            "safe_zone_en",
+            "loop_pose_en",
             "action_en",
             "background_generation_prompt_en",
         ):
@@ -78,6 +81,8 @@ def main() -> int:
         errors.append("model_variant must be H3-Base-Ref2VA")
     if presets.get("input_mode") != "ref2va":
         errors.append("input_mode must be ref2va")
+    if (presets.get("defaults") or {}).get("duration") != 8:
+        errors.append("default duration must be fixed to 8 seconds")
 
     expected_sections = [
         "subject_definitions",
@@ -100,7 +105,14 @@ def main() -> int:
             errors.append(f"ref2va_prompt_template_en: missing {section}")
 
     all_template_text = "\n".join(str(templates.get(section, "")) for section in expected_sections)
-    for placeholder in ("{duration}", "{setting_notes}", "{action}", "{extra_direction}"):
+    for placeholder in (
+        "{duration}",
+        "{setting_notes}",
+        "{safe_zone}",
+        "{loop_pose}",
+        "{action}",
+        "{extra_direction}",
+    ):
         if placeholder not in all_template_text:
             errors.append(f"ref2va_prompt_template_en: missing placeholder {placeholder}")
     for label in ("<Picture 1>", "<Picture 2>", "<Subject 1>", "<Subject 2>"):
@@ -109,6 +121,65 @@ def main() -> int:
     for marker in ("[reference generation]", "fully_preserved", "[Shot 1]"):
         if marker not in all_template_text:
             errors.append(f"ref2va_prompt_template_en: missing Ref2VA marker {marker}")
+
+    loop_markers = (
+        "0.00 seconds",
+        "8.00 seconds",
+        "final frame must match",
+        "solid collision boundary",
+        "visible air gap",
+    )
+    for marker in loop_markers:
+        if marker not in all_template_text:
+            errors.append(f"ref2va_prompt_template_en: missing loop/collision marker {marker}")
+
+    if templates and section_order == expected_sections:
+        for scene in scenes:
+            scene_id = scene.get("id", "??")
+            values = {
+                "duration": 8,
+                "setting_notes": scene.get("setting_notes_en", ""),
+                "safe_zone": scene.get("safe_zone_en", ""),
+                "loop_pose": scene.get("loop_pose_en", ""),
+                "action": scene.get("action_en", ""),
+                "extra_direction": "",
+            }
+            try:
+                rendered_sections = {
+                    section: str(templates[section]).format(**values).strip()
+                    for section in expected_sections
+                }
+            except (KeyError, ValueError) as exc:
+                errors.append(f"scene {scene_id}: cannot render Ref2VA prompt: {exc}")
+                continue
+            detailed = rendered_sections["detailed_description"]
+            word_count = len(re.findall(r"\b[\w'-]+\b", detailed))
+            if not 350 <= word_count <= 500:
+                errors.append(
+                    f"scene {scene_id}: detailed_description has {word_count} words; expected 350-500"
+                )
+            prompt = "\n\n".join(
+                f"{section}:\n{rendered_sections[section]}" for section in expected_sections
+            )
+            if len(prompt) > 7000:
+                errors.append(f"scene {scene_id}: rendered prompt exceeds 7000 characters")
+            for marker in loop_markers:
+                if marker not in prompt:
+                    errors.append(f"scene {scene_id}: rendered prompt missing {marker}")
+            action = str(scene.get("action_en", "")).lower()
+            if not any(
+                term in action
+                for term in (
+                    "without touch",
+                    "without contact",
+                    "without entering",
+                    "never enters",
+                    "never touches",
+                    "visible gap",
+                    "air gap",
+                )
+            ):
+                errors.append(f"scene {scene_id}: action must explicitly prohibit prop contact")
 
     if errors:
         print("\nValidation failed:", file=sys.stderr)
