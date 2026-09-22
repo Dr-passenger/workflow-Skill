@@ -1,0 +1,4 @@
+interface:
+  display_name: "萌宠动态艺术相框"
+  short_description: "为私有远程 MiniMax-H3 生成三种萌宠艺术相框视频任务"
+  default_prompt: "使用 $minimax-h3-pet-art-frame，将我上传的 1–3 张宠物照片制作成艺术相框，并为我的远程 MiniMax-H3 部署生成表情循环、左转惯性和右转惯性三种任务。"

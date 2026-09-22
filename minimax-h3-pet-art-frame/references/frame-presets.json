@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "model": "MiniMax-H3",
+  "duration": 8,
+  "resolution": "2K",
+  "max_pets": 3,
+  "modes": [
+    "expression-loop",
+    "left-inertia",
+    "right-inertia"
+  ],
+  "composition_layouts_en": {
+    "1": "Place the single pet centered in the lower-middle safe zone at natural scale, with its full visible body or the complete visible crop from the identity photo unobstructed.",
+    "2": "Place the two pets left and right of center with equal visual importance, matched eye height where anatomy permits, separate contact shadows, and at least one shoulder-width of air between silhouettes.",
+    "3": "Place three pets in a shallow balanced arc: one centered slightly forward and two set back left and right, all faces and limbs visible, equal identity importance, separate contact shadows, and no overlap."
+  },
+  "composite_prompt_template_en": "Create one polished photorealistic 16:9 opening-and-ending keyframe for a dynamic pet art frame. The first {pet_count} input image(s) are identity references for {pet_count} distinct real household pet(s); the final input image is the exact static background and framing reference. Preserve each pet's visible species and breed traits, face, eyes, ears, coat colors and marking boundaries, tail, body proportions, age impression, and existing accessories. Never blend identities or copy markings between pets. {layout} Reproduce the background edge to edge with the same camera, geometry, perspective, lighting, border, and object positions. Styling: {wardrobe} Match contact shadows, scale, light direction, and color temperature to the background. Keep all pets comfortably inside the safe center zone with margin for a small lateral sway. No person, extra animal, duplicate pet, text, logo, watermark, anatomy error, fused body, hidden limb, floating paw, costume covering the face or ears, or object intersection.",
+  "expression_timeline_en": "At 0.00 seconds every pet holds the exact opening pose. From 0.80 to 2.00 seconds, stagger natural eye movements and one soft blink per pet. From 2.00 to 3.40 seconds, create distinct readable expressions using only eyelids, gaze, eyebrows where anatomically present, ear angle, nose, whiskers, and mouth corners: gentle curiosity, mild delight, or alert interest, never a human face. From 3.40 to 4.80 seconds, let each pet transition to a second compatible expression at slightly different times so they do not move in mechanical synchrony. From 4.80 to 6.40 seconds, soften into calm contentment with one tiny nose or whisker twitch. From 6.40 to 7.20 seconds, reverse the expression changes in exact opposite order. From 7.20 to 8.00 seconds, hold the restored opening expression and blink state.",
+  "inertia_timelines_en": {
+    "left-inertia": "Simulate a smooth vehicle turning left while the camera and art frame remain fixed. From 0.00 to 0.80 seconds hold the exact first-frame state. From 0.80 to 2.20 seconds leftward vehicle acceleration creates natural outward inertia toward screen-right: planted paws or seated haunches stay anchored while each torso bends only 3-5 degrees right, the head lags right by no more than 2% of frame width, and loose ear tips, fur, scarf or harness edges trail slightly right. From 2.20 to 3.60 seconds sustain the gentle rightward lean without sliding. From 3.60 to 5.20 seconds the turn straightens and all pets recover through center, followed by one tiny 1-degree screen-left elastic overshoot. From 5.20 to 7.20 seconds damp the residual sway back to neutral. From 7.20 to 8.00 seconds converge exactly onto Picture 2, which is identical to Picture 1.",
+    "right-inertia": "Simulate a smooth vehicle turning right while the camera and art frame remain fixed. From 0.00 to 0.80 seconds hold the exact first-frame state. From 0.80 to 2.20 seconds rightward vehicle acceleration creates natural outward inertia toward screen-left: planted paws or seated haunches stay anchored while each torso bends only 3-5 degrees left, the head lags left by no more than 2% of frame width, and loose ear tips, fur, scarf or harness edges trail slightly left. From 2.20 to 3.60 seconds sustain the gentle leftward lean without sliding. From 3.60 to 5.20 seconds the turn straightens and all pets recover through center, followed by one tiny 1-degree screen-right elastic overshoot. From 5.20 to 7.20 seconds damp the residual sway back to neutral. From 7.20 to 8.00 seconds converge exactly onto Picture 2, which is identical to Picture 1."
+  },
+  "global_static_constraints_en": "Use one uninterrupted static shot. The decorative border, room or outdoor setting, floor, horizon, furniture, plants, windows, distant view, lights, reflections, rain, stars, shadows unrelated to the pets, and every background pixel remain completely stationary. No camera pan, tilt, zoom, push, pull, roll, tracking, reframing, shake, lens breathing, focus pumping, parallax, crop, or exposure pulse. Pets stay fully inside the frame, remain mutually separated, preserve exact identity and anatomy, and never collide with each other or the border.",
+  "frames": [
+    {
+      "id": "01",
+      "slug": "country-cottage-garden",
+      "title_zh": "乡村田园农舍",
+      "background": "assets/frames/01-country-cottage-garden.png",
+      "scene_style_en": "a fully photorealistic stone-and-timber cottage porch, herb garden, meadow, rustic light-oak border, and warm golden morning light",
+      "wardrobe_zh": "低遮挡的亚麻或细格纹领巾；已有项圈冲突时不新增",
+      "wardrobe_en": "Add at most one soft low-profile linen or muted gingham neckerchief to each pet, coordinated but not identical; if an existing collar or clothing conflicts, preserve the original and add nothing. No hat, flower crown, dress, shoes, or face-covering garment."
+    },
+    {
+      "id": "02",
+      "slug": "european-town-square",
+      "title_zh": "欧洲小镇街角",
+      "background": "assets/frames/02-european-town-square.png",
+      "scene_style_en": "a fully photorealistic quiet European old-town pedestrian lane with warm stucco, flower windows, open cobblestones, and a slim dark-walnut border",
+      "wardrobe_zh": "小号粗花呢领结或经典窄领巾；不戴贝雷帽",
+      "wardrobe_en": "Add at most one small tweed bow tie or slim classic neck scarf to each pet in coordinated muted colors; preserve conflicting original accessories instead. No beret, hat, coat, shoes, or anything covering the face, ears, or identifying markings."
+    },
+    {
+      "id": "03",
+      "slug": "near-future-observation-lounge",
+      "title_zh": "科幻观景生活舱",
+      "background": "assets/frames/03-near-future-observation-lounge.png",
+      "scene_style_en": "a photorealistic near-future residential observation lounge with a calm planet view, warm curved panels, satin-titanium border, and open matte floor",
+      "wardrobe_zh": "轻量银灰项圈或低轮廓胸背，只有细微青色灯缝；不戴头盔",
+      "wardrobe_en": "Add one lightweight low-profile brushed-silver collar or simple harness per pet with a single muted cyan seam, fitted naturally and never floating; preserve conflicting original accessories instead. No helmet, visor, armor, boots, backpack, or face covering."
+    },
+    {
+      "id": "04",
+      "slug": "cyberpunk-apartment",
+      "title_zh": "赛博朋克雨夜公寓",
+      "background": "assets/frames/04-cyberpunk-apartment.png",
+      "scene_style_en": "a photorealistic safe cyberpunk apartment interior with a rainy neon city window, dry open dark floor, cyan-magenta reflections, and a slim black illuminated border",
+      "wardrobe_zh": "炭灰低轮廓胸背或项圈，带一条低亮度青紫灯边；不改变毛色",
+      "wardrobe_en": "Add one low-profile charcoal harness or collar per pet with one thin dim cyan or magenta luminous trim, keeping fur colors and markings unchanged; preserve conflicting original accessories instead. No goggles, mask, cybernetic body parts, armor, boots, or face covering."
+    },
+    {
+      "id": "05",
+      "slug": "realistic-white-black-edge",
+      "title_zh": "极简纯白写实",
+      "background": "assets/frames/05-realistic-white-black-edge.png",
+      "scene_style_en": "a completely realistic brand-neutral pure-white studio field with no decoration and one uniform solid-black strip along the bottom edge",
+      "wardrobe_zh": "完全保留宠物现实外观，不新增服装或配饰",
+      "wardrobe_en": "Add nothing. Preserve every pet exactly as photographed, including only accessories already visible in its own identity image. No stylization, costume, recoloring, grooming redesign, or artificial glow."
+    }
+  ]
+}
