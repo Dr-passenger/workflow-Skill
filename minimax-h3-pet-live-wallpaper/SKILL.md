@@ -1,17 +1,17 @@
 ---
 name: minimax-h3-pet-live-wallpaper
-description: Create fixed eight-second seamless pet live-wallpaper videos from a user-supplied pet photo with fifteen bundled 16:9 indoor and secure outdoor home backgrounds. Use MiniMax-H3 in full-reference Ref2VA mode, apply low-collision actions, material-aware ground response, scene-specific ambient cycles, and hard 0.00/8.00-second loop anchors, then quality-check identity, clipping, physical interaction, and loop continuity.
+description: Create fixed eight-second seamless pet live-wallpaper videos from a user-supplied pet photo with fifteen bundled 16:9 indoor and secure outdoor home backgrounds. Use MiniMax-H3 in full-reference Ref2VA mode with Chinese prompt content, a locked panoramic camera, staged reversible pet interactions, material-aware contact response, scene-specific ambient cycles, and hard 0.00/8.00-second loop anchors, then quality-check identity, framing, clipping, physical interaction, and loop continuity.
 ---
 
 # 萌宠动态桌面 Ref2VA 工作流
 
-把用户上传的萌宠照片与内置家庭场景组合，并用 `MiniMax-H3` 的 Ref2VA 路径生成固定 8 秒的 16:9 可循环桌面壁纸。坚持单镜头、锁定机位、无道具接触的轻量动作，并要求 0.00 秒与 8.00 秒画面状态一致，降低身份漂移、穿模、闪烁和循环跳变。
+把用户上传的萌宠照片与内置家庭场景组合，并用 `MiniMax-H3` 的 Ref2VA 路径生成固定 8 秒的 16:9 可循环桌面壁纸。使用中文提示词内容、单镜头固定广角全景和受控的可逆场景互动，要求背景完整展示且 0.00 秒与 8.00 秒状态一致，降低身份漂移、穿模、错误接触、镜头漂移和循环跳变。
 
 ## 输入与默认值
 
 - 必需：一张主体清晰的萌宠照片。若用户未上传，先请求上传，不得伪造宠物身份。
 - 可选：场景编号 `01`–`15`；未指定时，根据毛色、动作空间、室内/室外偏好和整体明暗选择最合适的场景。
-- 固定：8 秒；脚本不接受其他时长。默认 16:9、2K、单镜头、静止相机、无对白无音乐。
+- 固定：8 秒；脚本不接受其他时长。默认 16:9、2K、单镜头、固定广角全景相机、无对白无音乐。
 - 草稿：用户明确接受较低分辨率或希望先省成本试片时，使用 768P（烟测档）。
 - API 密钥：仅从本机环境变量 `MINIMAX_API_KEY` 读取。不得要求用户在聊天中粘贴密钥，也不得把密钥写入文件或命令历史。
 
@@ -45,7 +45,7 @@ description: Create fixed eight-second seamless pet live-wallpaper videos from a
 
 ### 2. 选择场景
 
-读取 `references/scene-presets.json`，按编号匹配背景、`setting_notes_en`、`safe_zone_en`、`loop_pose_en`、`surface_response_en`、`ambient_cycle_en`、`state_restore_en` 和 `action_en`。选择标准：
+读取 `references/scene-presets.json`，按编号匹配背景、`setting_notes_zh`、`safe_zone_zh`、`loop_pose_zh`、`surface_response_zh`、`ambient_cycle_zh`、`state_restore_zh` 和 `action_zh`。选择标准：
 
 - 深色宠物优先明亮场景；浅色宠物优先中深色场景，保证轮廓分离。
 - 活泼宠物优先厨房、游戏房、阁楼或工作室；安静宠物优先雨窗、榻榻米或月夜卧室。
@@ -56,7 +56,7 @@ description: Create fixed eight-second seamless pet live-wallpaper videos from a
 
 ### 3. 编写 Ref2VA 提示词
 
-严格使用官方六段式顺序，字段名不得翻译或改名：
+严格使用 Ref2VA 六段式顺序，字段名和引用标记不得翻译或改名；各字段正文使用中文：
 
 1. `subject_definitions`
 2. `summary`
@@ -67,18 +67,21 @@ description: Create fixed eight-second seamless pet live-wallpaper videos from a
 
 本工作流将宠物抽象为 `<Subject 1>`、场景抽象为 `<Subject 2>`。图片只用于定义主体与环境，不作为具体关键帧，因此不要额外声明独立的 `<Picture N>` 关键帧条目。`summary` 使用 `[reference generation]`；`retention_analysis` 对两个主体都使用 `fully_preserved`；`detailed_description` 采用单个 `[Shot 1]`，完整描述构图、身份、环境、动作、机位、循环回位和同步声音。
 
-从所选场景的 `setting_notes_en`、`safe_zone_en`、`loop_pose_en`、`surface_response_en`、`ambient_cycle_en`、`state_restore_en`、`action_en` 与顶层 `ref2va_prompt_template_en` 组装提示词，只做必要改动：
+从所选场景的 `setting_notes_zh`、`safe_zone_zh`、`loop_pose_zh`、`surface_response_zh`、`ambient_cycle_zh`、`state_restore_zh`、`action_zh` 与顶层 `ref2va_prompt_template_zh` 组装中文提示词，只做必要改动：
 
 - 用照片中可见的真实身份锚点补充 `<Subject 1>`，不要猜测看不清的特征。
-- 动作不符合物种或身体条件时，降级为原地转头、眨眼、隔空嗅闻或沿开阔地面走一至两步。
-- 默认不允许宠物触碰、推动、跨越、进入或躲到道具后方；玩具、隧道、家具和植物保持完全静止并视为实体碰撞边界。
-- 保持宠物与所有道具之间有清晰可见的空气间隙，四肢完整可见，脚掌稳定接触同一地面平面。
+- 动作不符合物种、年龄或身体条件时，删掉该动作并降级为转头、转耳、眨眼、嗅闻、短距离行走或缓慢坐下/起身。
+- 每个场景最多允许一个预设互动对象；明确接触部位、方向、最大位移或形变量以及恢复路径。未被明确指定的玩具、隧道、家具、植物和边界均视为不可穿透的实体。
+- 允许的低风险互动包括：轻压软球但不位移、鼻尖轻触可弯叶尖、按压固定发光球、隔空探看隧道、踩压单片落叶、草地受力和浅雪脚印。不得抓取、叼走、扑跳、钻入、推倒或跨越道具。
+- 使用 <Picture 2> 的原始 16:9 视角边到边展示完整背景，画面四边和原本可见的主要建筑、家具、地面、窗户、围栏及远景全程保留；禁止裁切、放大、近景化或重新构图。
+- 相机像安装在三脚架上一样绝对固定，焦段、视平线、透视和景深不变；禁止切镜、推拉、缩放、摇移、俯仰、滚转、跟随、抖动、镜头呼吸和焦点抽动。
+- 萌宠位于全景画面中下部，约占画面高度 15%–22%，头、躯干、四肢和尾巴完整可见；除唯一指定互动对象外，与所有物体保持清晰安全间隙。
 - 只允许提示词明确声明的地面反馈：地毯/榻榻米受压后回弹，瓷砖/木板保持刚性，草叶弯曲后复位，雪地脚印必须与每次脚掌落点同步。
 - 对雨水、树叶、火光、星光投影和玻璃反射使用完整的 8 秒闭环变化；不得随机新增粒子、影子或远离宠物的脚印。
 - 对会改变场景状态的效果写明恢复机制。雪地返程必须踩回同一组脚印，松雪按反向顺序回填，并在 7.00 秒前恢复开场雪面。
 - 固定时间轴：0.00–1.00 秒保持起始锚点；1.00–4.50 秒执行微动作；4.50–7.00 秒沿相同路线反向返回；7.00–8.00 秒恢复并保持起始锚点。
 - 8.00 秒必须匹配 0.00 秒的宠物坐标、比例、姿势、四肢位置、头部方向、目光、耳尾、毛色纹路、接触阴影、道具位置、镜头、光线与背景状态。
-- 始终保留静止机位、单镜头、自然接触阴影、无额外动物、无形变/重复肢体/闪烁/文字/标识。
+- 始终保留固定全景机位、单镜头、自然接触阴影、无额外动物、无形变/重复肢体/闪烁/文字/标识。
 
 ### 4. 提交前确认成本
 
@@ -111,13 +114,14 @@ python scripts/minimax_h3_wallpaper.py --scene 01 --pet "C:\path\pet.jpg" --back
 检查输出：
 
 - 身份：脸型、毛色纹路、眼睛、耳尾和体型与 `<Picture 1>` 一致。
-- 解剖：四肢数量正确、脚掌接地，无粘连、穿模、复制或突然消失；宠物与每个道具之间始终有可见间隙。
+- 解剖：四肢数量正确、脚掌接地，无粘连、穿模、复制或突然消失；只有预设互动对象允许发生明确接触，其他物体始终保留可见间隙。
+- 互动：动作顺序、接触部位、物体形变或位移幅度符合预设；球、叶尖、绳结、发光反馈、落叶和雪面必须按指定路径复原。
 - 物理反馈：压痕、草叶弯曲、雨滴、反射、脚印和接触阴影只在对应接触或环境区域出现，不提前出现、不延迟、不复制到远处。
-- 场景：家具、光线、透视和镜头位置与 `<Picture 2>` 稳定一致，无新增人物或动物。
+- 场景与机位：完整保留 `<Picture 2>` 原始画面四边、全景范围、家具、光线、透视、焦段和镜头位置，无裁切、缩放、重构图、新增人物或动物。
 - 循环：逐帧比较 0.00 秒与 8.00 秒；宠物位置、姿态、四肢、耳尾、道具、阴影、照明和背景状态必须一致。
 - 桌面体验：运动不抢眼，画面边缘保留可用空间，无文字、标识或水印。
 
-每次只改一个问题：身份漂移时加强 `<Subject 1>` 的可见身份锚点；发生穿模时扩大 `safe_zone_en` 并缩短步数；循环跳变时删减微动作并延长 7.00–8.00 秒静止锚点；背景漂移时加强 `<Subject 2>` 的 `fully_preserved` 约束。若模型输出仍无法满足首尾一致，重新生成，不得声称像素级一致已得到保证。
+每次只改一个问题：身份漂移时加强 `<Subject 1>` 的可见身份锚点；发生穿模时扩大 `safe_zone_zh` 并缩短步数；互动错误时降低位移或改成隔空观察；循环跳变时删减微动作并延长 7.00–8.00 秒静止锚点；背景裁切或机位漂移时加强 `<Subject 2>` 的 `fully_preserved`、完整全景和固定机位约束。若模型输出仍无法满足首尾一致，重新生成，不得声称像素级一致已得到保证。
 
 ## 输出
 

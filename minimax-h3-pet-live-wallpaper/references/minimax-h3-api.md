@@ -59,7 +59,7 @@ Image-to-video and reference-to-video are mutually exclusive. Never include `fir
 
 ## Official Ref2VA prompt structure
 
-Write all six sections in English and preserve this exact order and field spelling:
+Preserve this exact order and field spelling. The official guide requests English rewrite content; this workflow intentionally keeps the section names, reference labels, and technical markers unchanged while using Chinese section content because its target user explicitly requires Chinese prompts:
 
 ```text
 subject_definitions:
@@ -85,7 +85,7 @@ N/A
 
 Use `<Subject N>` for reusable visible content such as the pet and environment. Because both pictures only define subjects in this workflow and are not concrete first/key/last frames, cite `<Picture 1>` and `<Picture 2>` inside the corresponding subject definitions rather than creating standalone picture entries. Keep every label's meaning consistent across all six sections.
 
-For generation tasks, the official guide normally targets a detailed 350–500 English-word `detailed_description`. A single shot still needs explicit composition, subject appearance and position, environment and lighting, action and state changes, camera behavior, current sound, and where references take effect. This workflow also inserts a fixed 8-second action timeline, scene-specific safe zone, solid collision boundaries, visible prop clearance, material-aware ground response, a closed ambient cycle, state restoration, and matching 0.00/8.00-second loop anchors.
+For English generation tasks, the official guide normally targets a detailed 350–500-word `detailed_description`. The Chinese mode cannot be validated by English word count, so this workflow validates 800–1800 Han characters instead. A single shot still establishes composition, subject appearance and position, environment and lighting, staged action and state changes, fixed camera behavior, current sound, and where references take effect. It also inserts a fixed 8-second action timeline, full-width panoramic framing, scene-specific safe zones, solid collision boundaries, one explicitly allowed reversible interaction, material-aware contact response, a closed ambient cycle, state restoration, and matching 0.00/8.00-second loop anchors.
 
 ## Current request limits
 

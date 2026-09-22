@@ -75,20 +75,20 @@ def build_prompt(
 ) -> str:
     if duration != 8:
         raise ValueError("This loop-safe workflow is fixed to exactly 8 seconds")
-    templates = presets["ref2va_prompt_template_en"]
+    templates = presets["ref2va_prompt_template_zh"]
     section_order = presets["ref2va_section_order"]
     extra_direction = ""
     if prompt_extra and prompt_extra.strip():
-        extra_direction = "Additional user direction: " + prompt_extra.strip()
+        extra_direction = "用户补充要求：" + prompt_extra.strip()
     values = {
         "duration": duration,
-        "setting_notes": scene["setting_notes_en"],
-        "safe_zone": scene["safe_zone_en"],
-        "loop_pose": scene["loop_pose_en"],
-        "surface_response": scene["surface_response_en"],
-        "ambient_cycle": scene["ambient_cycle_en"],
-        "state_restore": scene["state_restore_en"],
-        "action": scene["action_en"],
+        "setting_notes": scene["setting_notes_zh"],
+        "safe_zone": scene["safe_zone_zh"],
+        "loop_pose": scene["loop_pose_zh"],
+        "surface_response": scene["surface_response_zh"],
+        "ambient_cycle": scene["ambient_cycle_zh"],
+        "state_restore": scene["state_restore_zh"],
+        "action": scene["action_zh"],
         "extra_direction": extra_direction,
     }
     prompt = "\n\n".join(
@@ -113,11 +113,13 @@ def validate_ref2va_loop_prompt(prompt: str) -> None:
     if any(position < 0 for position in positions) or positions != sorted(positions):
         raise ValueError("Prompt does not preserve the official Ref2VA six-section order")
     required_loop_markers = (
-        "0.00 seconds",
-        "8.00 seconds",
-        "final frame must match",
-        "solid collision boundary",
-        "visible air gap",
+        "0.00 秒",
+        "8.00 秒",
+        "末帧必须与首帧一致",
+        "实体碰撞边界",
+        "清晰可见的安全间隙",
+        "固定机位",
+        "完整展示",
     )
     missing = [marker for marker in required_loop_markers if marker not in prompt]
     if missing:
